@@ -74,4 +74,4 @@ void PlayAlarm()							//启动告警函数
 		
  		delay250(1);		//延时250us
 	}				
-}  
+}  		 

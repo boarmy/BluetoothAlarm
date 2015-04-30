@@ -20,13 +20,11 @@
 bit flagFrame = 0;  //帧接收完成标志，即接收到一帧新数据
 bit flagTxd = 0;    //单字节发送完成标志，用来替代TXD中断标志位
 unsigned char cntRxd = 0;   //接收字节计数器
-unsigned char idata bufRxd[32];  //接收字节缓冲区  这里STC15W204S没有外部存储器，使用256B内部RAM
-//sbit BEEPT = P1^3;
+unsigned char idata bufRxd[64];  //接收字节缓冲区
+
 extern void UartAction(unsigned char *buf, unsigned char len);
-extern bit CmpMemory(unsigned char *ptr1, unsigned char *ptr2, unsigned char len);
-extern void mdelay(unsigned int ms );
-//extern bit flagBuzzOn;
-/* 串口配置函数，baud-通信波特率 9600bps@11.0592MHz */
+
+/* 串口配置函数，baud-通信波特率 */
 void ConfigUART()
 {
 	SCON = 0x40;		//8位数据,可变波特率
@@ -36,7 +34,7 @@ void ConfigUART()
 	T2H = 0xFE;			//设定定时初值
 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
 	AUXR |= 0x10;		//启动定时器2
-	P_SW1 = 0x40;  	//串口硬件引脚切换到P3.7、P3.6
+	//P_SW1 = 0x40;  	//串口硬件引脚切换到P3.7、P3.6
 	//EA = 1;	   		//开放CPU中断
 	ES = 1;
 	REN = 1;			//使能接收
@@ -55,34 +53,21 @@ void UartWrite(unsigned char *buf, unsigned char len)
 unsigned char UartRead(unsigned char *buf, unsigned char len)
 {
     unsigned char i;
-    unsigned char recvlen = 0;
+    
     if (len > cntRxd)  //指定读取长度大于实际接收到的数据长度时，
     {                  //读取长度设置为实际接收到的数据长度
         len = cntRxd;
     }
-
     for (i=0; i<len; i++)  //拷贝接收到的数据到接收指针上
     {
         *buf++ = bufRxd[i];
-		bufRxd[i] = '\0';
     }
     cntRxd = 0;  //接收计数器清零
-
+    
     return len;  //返回实际读取长度
 }
-
-void clearbufRxd()
-{
-	unsigned char len,i;
-	len = sizeof(bufRxd);
-
-    for (i=0; i<len; i++)  
-    {
-		bufRxd[i] = '\0';
-    }
-}
 /* 串口接收监控，由空闲时间判定帧结束，需在定时中断中调用，ms-定时间隔 */
-void UartRxMonitor(unsigned char ms)
+void UartRxFrameMonitor(unsigned char ms)
 {
     static unsigned char cntbkp = 0;
     static unsigned char idletmr = 0;
@@ -111,25 +96,22 @@ void UartRxMonitor(unsigned char ms)
         cntbkp = 0;
     }
 }
-/* 串口驱动函数，监测数据帧的接收，调度功能函数，需在主循环中调用 */
-void UartDriver()
+/* 串口接收处理函数，监测数据帧的接收，调度功能函数，需在主循环中调用 */
+void UartRxMonitor()
 {
-    unsigned char len;			
-    unsigned char idata buf[32]; 		//这里STC15W204S没有外部存储器，使用256B内部RAM
+    unsigned char len;
+    unsigned char idata buf[40];
 
     if (flagFrame) //有命令到达时，读取处理该命令
     {
         flagFrame = 0;
         len = UartRead(buf, sizeof(buf));  //将接收到的命令读取到缓冲区中
-		
         UartAction(buf, len);  //传递数据帧，调用动作执行函数
-    }  
+    }
 }
-
 /* 串口中断服务函数 */
 void InterruptUART() interrupt 4
 {
-	//flagBuzzOn = 1;
     if (RI)  //接收到新字节
     {
         RI = 0;  //清零接收中断标志位
@@ -143,48 +125,4 @@ void InterruptUART() interrupt 4
         TI = 0;   //清零发送中断标志位
         flagTxd = 1;  //设置字节发送完成标志
     }
-}
-/* 是接收到告警的命令吗 */
-bit isBuzzOn()
-{
-	unsigned char recvlen = 0;
-	unsigned char code cmd0[] = "bon";   //开蜂鸣器命令
-
-	recvlen = strlen(bufRxd);
-	if((recvlen > 0)&&(recvlen >= (sizeof(cmd0)-1)))
-	{
-		if (CmpMemory(bufRxd, cmd0,sizeof(cmd0)-1)) 
-		{
-		    return 1;
-		}
-	}
-
-	return 0;
-}
-/* 发送AT命令时串口接收应答结果，reStr-应接收的数据的指针，len-指定应接收数据的长度 */
-bit UartAtAskResult(unsigned char *reStr, unsigned char len)
-{
-    unsigned char relen;
-	unsigned char retry=10;			
-    unsigned char idata buf[32]; 		//这里STC15W204S没有外部存储器，使用256B内部RAM
-
-	while(retry--)
-	{
-	    if (flagFrame) //有命令到达时，读取处理该命令
-	    {
-	        flagFrame = 0;
-	        relen = UartRead(buf, sizeof(buf));  //将接收到的命令读取到缓冲区中
-	
-			if(relen >= len)
-			{
-				UartWrite(buf, relen);		
-				if (CmpMemory(buf, reStr,len)) 
-				{
-				    return 1;
-				}
-			}
-	    }
-		mdelay(100);
-	}
-	return 0;
 }

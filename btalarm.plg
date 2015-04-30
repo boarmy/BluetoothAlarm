@@ -3,9 +3,337 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-D:\work\btalarm\btalarm.uvproj
-Project File Date:  04/28/2015
+D:\work\tt\BluetoothAlarm\btalarm.uvproj
+Project File Date:  04/30/2015
 
 <h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PLAYALARM?MUSIC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY16000MS?HC08
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HC08_ATTEST?HC08
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HC08_SETROLE?HC08
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HC08_RESET?HC08
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HC08_INIT?HC08
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0C0DH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 06D8H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 06F4H
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _UARTATASKRESULT
+    MODULE:  hc08.obj (HC08)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UARTATASKRESULT
+    MODULE:  hc08.obj (HC08)
+    ADDRESS: 0A0DH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UARTATASKRESULT
+    MODULE:  hc08.obj (HC08)
+    ADDRESS: 088FH
+Program Size: data=98.6 xdata=104 code=3193
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 15 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0679H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1657
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0679H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1657
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0679H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1657
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0679H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1657
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0679H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1657
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PLAYALARM?MUSIC
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLCD1602
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 06C1H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDSHOWSTR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0319H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCDAREACLEAR
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 0335H
+Program Size: data=31.3 xdata=104 code=1739
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 7 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling uart.c...
+UART.C(28): warning C280: 'baud': unreferenced local variable
+compiling music.c...
+compiling hc08.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PLAYALARM?MUSIC
+Program Size: data=31.3 xdata=104 code=1587
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+UART.C(28): warning C280: 'baud': unreferenced local variable
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=31.3 xdata=104 code=1593
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=31.3 xdata=104 code=1585
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=31.3 xdata=104 code=1582
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=65.4 xdata=104 code=2648
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=65.4 xdata=104 code=2679
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=51.3 xdata=104 code=1621
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(47): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=155.3 xdata=0 code=1620
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(46): warning C206: 'PlayAlarm': missing function-prototype
+compiling uart.c...
+compiling music.c...
+compiling hc08.c...
+linking...
+Program Size: data=155.3 xdata=0 code=1620
+creating hex file from "btalarm"...
+"btalarm" - 0 Error(s), 1 Warning(s).
 Clean started: Project: 'btalarm'
    deleting intermediate output files for target 'Target 1'

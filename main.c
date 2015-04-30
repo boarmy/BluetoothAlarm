@@ -20,53 +20,31 @@
 #include <stdio.h>
 #include <string.h>
 
+sbit BUZZ = P1^6;  //蜂鸣器控制引脚
+
 bit flagBuzzOn = 0;   //蜂鸣器启动标志
-unsigned int onLine = 0;   //设备离开监测区时间
-unsigned int stime = 0;		//发送告警命令间隔时间
 unsigned char T0RH = 0;  //T0重载值的高字节
 unsigned char T0RL = 0;  //T0重载值的低字节
 
 void ConfigTimer0(unsigned int ms);
-void DevOfflineMonitor();
-extern void UartDriver();
+extern void UartRxMonitor();
 extern void ConfigUART();
-extern void UartRxMonitor(unsigned char ms);
+extern void UartRxFrameMonitor(unsigned char ms);
 extern void UartWrite(unsigned char *buf, unsigned char len);
-extern void PlayAlarm();
-extern void clearbufRxd();
-extern bit isBuzzOn();
-extern bit HC08_Init(void);
-extern void HC08_Reset(void);
-extern void Delay8000ms();
-//extern unsigned char idata bufRxd;
-//extern void InitLcd1602();
-//extern void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str);
-//extern void LcdAreaClear(unsigned char x, unsigned char y, unsigned char len);
 
 void main()
 {
     EA = 1;            //开总中断
-	ConfigUART();  		//配置波特率为9600
-    ConfigTimer0(1);   //配置T0定时1ms	r 
-	HC08_Reset();
-	//HC08_Init();
-//	UartWrite("HC08_init\r\n", 10);
-	//Delay8000ms();
+    ConfigTimer0(1);   //配置T0定时1ms
+    ConfigUART();  //配置波特率为9600
+    
     while (1)
     {
-	   DevOfflineMonitor(); 
-       UartDriver();  //调用串口驱动
-
-	   if(flagBuzzOn)
-	   {
-	   		UartWrite("bon\r\n", 4);
+		UartRxMonitor();  //调用串口驱动
+		if(flagBuzzOn)
+		{
 			PlayAlarm();
-	   }
-	   if(stime > 800)  //每隔1s，发送一次buzz on
-	   {
-	   		stime = 0;
-		 	UartWrite("bon\r\n", 4);
-	   }	   														      
+		}
     }
 }
 /* 内存比较函数，比较两个指针所指向的内存数据是否相同，
@@ -89,10 +67,9 @@ void UartAction(unsigned char *buf, unsigned char len)
 {
     unsigned char i;
 	unsigned char bufRxd[20] = {0};
-    unsigned char code cmd0[] = "bon";   //开蜂鸣器命令
+    unsigned char code cmd0[] = "buzz on";   //开蜂鸣器命令
     unsigned char code cmd1[] = "buzz off";  //关蜂鸣器命令
     unsigned char code cmd2[] = "showstr ";  //字符串显示命令
-	//unsigned char code cmd3[] = "OK";  //字符串显示命令
     unsigned char code cmdLen[] = {          //命令长度汇总表
         sizeof(cmd0)-1, sizeof(cmd1)-1, sizeof(cmd2)-1,
     };
@@ -118,7 +95,7 @@ void UartAction(unsigned char *buf, unsigned char len)
         case 1:
             flagBuzzOn = 0; //关闭蜂鸣器
             break;
-       /* case 2:
+        /*case 2:
             buf[len] = '\0';  //为接收到的字符串添加结束符
             LcdShowStr(0, 0, buf+cmdLen[2]);  //显示命令后的字符串
             i = len - cmdLen[2];              //计算有效字符个数
@@ -126,41 +103,17 @@ void UartAction(unsigned char *buf, unsigned char len)
             {
                 LcdAreaClear(i, 0, 16-i);
             }
-            break;	  */
-        /*case 3:
-           // flagAtAsk = 1; //AT应答
-		   	UartWrite(buf, strlen(buf));
-            break;	*/
+            break;	 */
         default:   //未找到相符命令时，给上机发送“错误命令”的提示
-			sprintf(bufRxd,"bad command:%s\r\n",buf);
-            //UartWrite("bad command:\r\n", sizeof("bad command.\r\n")-1);
-			UartWrite(bufRxd, sizeof(bufRxd)-1);
+            UartWrite("bad command.\r\n", sizeof("bad command.\r\n")-1);
+			//sprintf(bufRxd,"bad command:%s\r\n",buf);
+			//UartWrite(bufRxd, strlen(bufRxd)-1);
             return;
     }
     buf[len++] = '\r';  //有效命令被执行后，在原命令帧之后添加
     buf[len++] = '\n';  //回车换行符后返回给上位机，表示已执行
-    //UartWrite(buf, len);
+    UartWrite(buf, len);
 }
-
-void DevOfflineMonitor()
-{
-	//unsigned char bufRxd[20] = {0};
-	if(flagBuzzOn)
-	{
-		if(isBuzzOn())
-		{
-		   onLine = 0;
-		}
-		else if(onLine > 3000)//3S内没收到设备发送消息，认为设备已离开监控范围
-		{
-		   flagBuzzOn = 0;
-		   onLine = 0;
-		}		
-	}
-	//sprintf(bufRxd,"onLine:%d\r\n",onLine);
-	//UartWrite(bufRxd, strlen(bufRxd));
-}
-
 /* 配置并启动T0，ms-T0定时时间 */
 void ConfigTimer0(unsigned int ms)
 {
@@ -184,10 +137,10 @@ void InterruptTimer0() interrupt 1
 {
     TH0 = T0RH;  //重新加载重载值
     TL0 = T0RL;
-
-	if (flagBuzzOn)
-		onLine++; 
-
-	stime++;
-    UartRxMonitor(1);  //串口接收监控
+    if (flagBuzzOn)  //执行蜂鸣器鸣叫或关闭
+        BUZZ = ~BUZZ;
+    else
+        BUZZ = 1;
+    UartRxFrameMonitor(1);  //串口接收监控
 }
+
